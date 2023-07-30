@@ -17,13 +17,13 @@ export const AuthProvider = ({children}) => {
       senha
     })
     .then(res => {
-      setUser((JSON.stringify(JSON.parse(res.config.data).login)))
-      setToken(res.headers.authorization)
-      AsyncStorage.setItem("user", user)
-      AsyncStorage.setItem("token", token)
-      AsyncStorage.setItem("username", user)
+      const response = res
+      setUser((JSON.stringify(JSON.parse(response.config.data).login)))
+      setToken(response.headers.authorization)
+      AsyncStorage.setItem("token", response.headers.authorization)
+      AsyncStorage.setItem("username", JSON.parse(response.config.data).login)
       
-      api.defaults.headers.Authorization = `Bearer ${token}`;
+      api.defaults.headers.Authorization = `Bearer ${response.headers.authorization}`;
    
     })
     .catch(e => { 

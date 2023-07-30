@@ -9,8 +9,3 @@ export const api = axios.create({
       },
       
 })
-export const api2 = axios.create({
-  baseURL: "http://localhost:8080/api",
- 
-    
-})
