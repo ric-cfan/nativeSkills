@@ -40,7 +40,7 @@ const Login = () => {
       await AsyncStorage.removeItem("loginCredentials");
     }
     login(username, password).then((res) => {
-      if(true) {
+      if(res) {
         navigation.navigate("Home");
       }
       else {
