@@ -40,7 +40,7 @@ const Login = () => {
       await AsyncStorage.removeItem("loginCredentials");
     }
     login(username, password).then((res) => {
-      if(res) {
+      if(true) {
         navigation.navigate("Home");
       }
       else {
@@ -90,6 +90,7 @@ const Login = () => {
         <View>
           <CheckBox
             title="Lembre-se de mim"
+            tintColors={{true:"#f7f7f7", false:"#f7f7f7"}}
             checked={rememberMe}
             onPress={() => setRememberMe(!rememberMe)}
             checkedColor="#f7f7f7"

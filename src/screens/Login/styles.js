@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     logo: { 
     width: 158,
     height: 130,
+    marginTop: 3,
     marginBottom: 30,
     },
 
@@ -71,8 +72,8 @@ export const styles = StyleSheet.create({
     },
 
     iconSenha: {
-      width: "10rem",
       flexDirection: "row",
+      width: 160,
       alignItems: "flex-start",
       justifyContent: "space-evenly", 
       marginRight: 89.5,
@@ -83,5 +84,13 @@ export const styles = StyleSheet.create({
       fontWeight: "bold",
       color: "#4c4a57",
     },
+
+    inputETitulo: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+      height: 30
+    }
   
   });

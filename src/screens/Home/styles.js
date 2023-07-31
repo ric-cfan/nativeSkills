@@ -2,45 +2,50 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     
-  boxLogin:{
-  flex: 1,
+  boxHome:{
   width: "100%",
+  minHeight: "100%",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "#000000",
+  justifyContent: "space-between",
+  backgroundColor: "#1c1c1b",
   flexDirection: "column",
-  alignItems: "center",
   },
 
   boxModal:{
-    flex: 1,
-    minHeight: 800,
-    display: "flex",
+    width: 300,
+    height: 300,
+    justifyContent:"space-evenly",
     alignItems: "center",
-    justifyContent: "space-evenly",
-    flexDirection: "column",
     backgroundColor: "#1C1C1B",
+    borderRadius: 5,
+    alignSelf:"center",
+    marginTop: 60,
+    border: "2px solid #fff"
     },
 
     logo: { 
       width: 158,
       height: 130,
-      marginBottom: 30,
       marginTop: 20,
       },
       
     topo: {
+      width: "100%",
+      height: 170,
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-evenly",
       alignItems: "center",
-      backgroundColor: "#000000"
+      backgroundColor: "#000000",
+      paddingBottom:5,
     },
 
     logout: {
       display: "flex",
       alignItems: "center",
+      justifyContent: "center",
+      
     },
 
     centroTopo: {
@@ -51,30 +56,37 @@ export const styles = StyleSheet.create({
     },
 
     abrirModal: {
+      padding: 5,
       backgroundColor: "#660e0a",
-      padding: "5px",
-      borderRadius: "3px",
+      fontWeight: "bold",
+      borderRadius: 5,
+      marginTop: 3,
     },
 
     input: {
       border: "1px solid black",
-      padding: "0.5rem",
       backgroundColor: "#fff",
-      borderRadius: "5px",
       textAlign: "center",
     },
 
-    addSkill: {
-      backgroundColor: "#660e0a",
-      padding: "40px",
-      borderRadius: "5px",
-      fontSize:"70",
-  
+    adicionar: {
+      padding: 5,
+      fontWeight: "bold",
+      borderRadius: 5,
+      marginTop: 3,
+      backgroundColor: "#4846cf",
+    },
+
+    voltar: {
+      padding: 5,
+      fontWeight: "bold",
+      borderRadius: 5,
+      marginTop: 3,
+      backgroundColor: "#c9261e",
     },
 
     selectContainer: {
       backgroundColor: "#fff",
-      borderRadius: "5px",
     },
 
     inputETitulo: {

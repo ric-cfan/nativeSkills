@@ -1,12 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { useContext, useEffect, useState, useRef } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View, FlatList, Alert } from "react-native";
+import { useContext, useEffect, useState  } from "react";
+import { Image, Text, TextInput, TouchableOpacity, View, FlatList, Alert, Modal } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { AuthContext } from "../../Context/auth";
 import { api } from "../../services/api";
 import { styles } from "./styles";
-import { Modalize } from "react-native-modalize";
 import { SelectList } from "react-native-dropdown-select-list";
 import { SkillCard } from "../../components/SkillCard";
 
@@ -16,10 +15,10 @@ const Home = () => {
   const [userSkills, setUserSkills] = useState([]);
   const [generalSkills, setGeneralSkills] = useState([]);
   const [selected, setSelected] = useState([]);
-  const [skill, setSkill] = useState([]);
+  const [skill, setSkill] = useState(0);
   const [lvl, setLvl] = useState(0);
-  const modalizeRef = useRef(null);
   const [userName, setUserName] = useState("")
+  const [modalOn, setModalOn] = useState(false);
 
   useEffect(() => {
     getUserId() 
@@ -81,6 +80,12 @@ const Home = () => {
   //post
 
   const addSkill = async (skillId, lvl) => {
+    if(skillId == 0){
+      Alert.alert("Ocorreu um erro e a skill não foi adicionada","Você precisa escolher uma skill", [
+        {text: "OK"}
+      ])
+      return null;
+    } 
     const token = await AsyncStorage.getItem("token")
     const userId = await AsyncStorage.getItem("userId")
 
@@ -111,7 +116,8 @@ const Home = () => {
   };
 
   function onOpen() {
-    modalizeRef.current?.open();
+    setSkill(0);
+    setModalOn(true);
   }
   
   return (
@@ -124,13 +130,17 @@ const Home = () => {
       <View style={styles.centroTopo}>
         <Text style={{color:"#fff"}} >Bem vindo, {userName}!</Text>
 
-        <TouchableOpacity style={styles.abrirModal}>
-          <Text onPress={onOpen} style={{color:"#fff", fontWeight: "bold", textAlign: "center"}} >ADICIONAR SKILL</Text>
+        <TouchableOpacity >
+          <View style={styles.abrirModal}>
+          <Text onPress={() => onOpen()} style={{color:"#fff", fontWeight: "bold", textAlign: "center"}} >ADICIONAR SKILL</Text>
+          </View>
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity onPress={() => handleLogout()} style={styles.logout}>
-        <Text style={{color:"#fff", fontWeight: "bold", fontSize: "50", textAlign: "center"}}>LOGOUT</Text>
+        <Text style={{color:"#fff", fontWeight: "bold", 
+        // fontSize: "50", 
+        textAlign: "center"}}>LOGOUT</Text>
         <Icon name="logout" size={30} color = "#fff" />
       </TouchableOpacity>
     </View>
@@ -150,15 +160,15 @@ const Home = () => {
 
       {/* Modal */}
 
-      <Modalize
-        ref={modalizeRef}
-        // panGestureEnabled={false}
-        // adjustToContentHeight={true}
-        // tapGestureEnabled={false}
+      <Modal
+        animationType="fade"
+        visible={modalOn}
+        transparent={true}
       >
         <View style={styles.boxModal}>
 
-        <Text style={{color:"#c7ac61", fontSize:"50", fontWeight:"bold"}}>APRENDENDO NOVA SKILL</Text>
+        <Text style={{color:"#c7ac61", 
+        fontWeight:"bold", textAlign: "center"}}>APRENDENDO NOVA SKILL</Text>
 
           <View style={styles.selectContainer}>
             <SelectList
@@ -172,7 +182,8 @@ const Home = () => {
           </View>
 
           <View style={styles.inputETitulo}>
-          <Text style={{color:"#fff", fontSize:"20", fontWeight:"bold"}}>Selecione o nível da skill:</Text>
+          <Text style={{color:"#fff", 
+          fontWeight:"bold"}}>Selecione o nível da skill:</Text>
             <TextInput
               placeholder="lvl"
               placeholderTextColor="#918d8d"
@@ -183,11 +194,21 @@ const Home = () => {
             />
           </View>
 
-            <TouchableOpacity onPress={() => addSkill(skill, lvl)} style={styles.addSkill}>
-                <Text style={{color:"#fff", fontSize:"70", fontWeight:"bold"}}>ADICIONAR</Text>
+            <TouchableOpacity onPress={() => addSkill(skill, lvl)} >
+              <View style={styles.adicionar}>
+                <Text style={{color:"#fff", 
+                fontWeight:"bold"}}>ADICIONAR</Text>
+                </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => setModalOn(false)} >
+              <View style={styles.voltar}>
+                <Text style={{color:"#fff", 
+                fontWeight:"bold"}}>VOLTAR</Text>
+                </View>
             </TouchableOpacity>
         </View>
-      </Modalize>
+      </Modal>
 
     </View>
   );

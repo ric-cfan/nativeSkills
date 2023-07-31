@@ -37,21 +37,22 @@ export const SkillCard = ({ item }) => {
 
     if (isShown) {
     return (
-        <View style={styles.container}>
-            <TouchableOpacity>
-                <View style={styles.main}>
-                    <Text style={styles.textoNome}>{item.skill.nome}</Text>
+                <View style={styles.mainCard}>
                     <View style={styles.containerCard}>
 
-                        <Image source={{ uri: item.skill.urlImagem + '?' + new Date() }} style={styles.img} />
-
+                    <Text style={styles.textoNome}>{item.skill.nome}</Text>
+                       
+                        <Image source={{ uri: item.skill.urlImagem }} style={styles.img} />
+               
                         <View>
+                          <View style={{alignItems:"center", marginBottom:14}}>
                             <Text style={styles.texto}>Descrição: {item.skill.descricao}</Text>
                             <Text style={styles.texto}>Level: {newLvl}</Text>
 
-                            <Text style={styles.textoLvl}>Subiu de lvl? Selecione o novo número abaixo e clique em atualizar:</Text>
-                            
-                            <View style={styles.inputBotoes}>
+                            <Text style={styles.textoLvl}>Subiu de lvl? Selecione o novo número abaixo e clique em atualizar!</Text>
+                            </View>
+                        
+                          <View style={{alignItems:"center"}}>
                           <TextInput
                             placeholder="lvl"
                             placeholderTextColor="#918d8d"
@@ -60,6 +61,7 @@ export const SkillCard = ({ item }) => {
                             value={lvl}
                             style={styles.input}
                           />
+                          </View>
 
                         <View style={styles.botoes}>
                           <TouchableOpacity onPress={() => updateSkill(item.id, lvl)} style={styles.atualizar}>
@@ -71,11 +73,8 @@ export const SkillCard = ({ item }) => {
                           </TouchableOpacity>
                           </View>
                         </View>
-
-                        </View>
-                    </View>
                 </View>
-            </TouchableOpacity>
+         
         </View>
     )
   } 

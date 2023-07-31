@@ -2,18 +2,11 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
-    container: {
-        flex: 1,
-        backgroundColor: '#1c1c1b',
-        alignItems: 'center'
-    },
-
-    main: {
-        width: '105%',
-        height: 240,
-        alignItems: 'center',
+    mainCard: {
+        
+        height: 500,
         borderRadius: 20,
-        backgroundColor: '#b8b8d9',
+        backgroundColor: '#44454f',
         marginBottom: 20,
         marginTop: 20,
         paddingTop: 10,
@@ -23,42 +16,51 @@ export const styles = StyleSheet.create({
     inputBotoes: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-evenly",
-      alignItems: "center",
+      justifyContent: "space-between",
+      alignItems: "center" ,
+      maxWidth: "50%",
     },
 
     input: {
       border: "1px solid black",
-      padding: "0.5rem",
-      backgroundColor: "#fff"
+      padding: "8px",
+      width: "50%",
+      backgroundColor: "#fff",
+      textAlign: "center",
     },
 
     deletar: {
       backgroundColor: "#c9261e",
       padding: "10px",
       borderRadius: "3px",
+      width:"40%",
     },
 
     atualizar: {
       backgroundColor: "#4846cf",
       padding: "10px",
       borderRadius: "3px",
+      width:"40%",
     },
 
     botoes: {
       marginTop: "2px",
       height:  86,
-      display: "flex",
-      justifyContent: "space-between",
+      flexDirection:"row",
+      justifyContent:"space-evenly",
+      alignItems:"center",
     },
 
     containerCard: {
-        width: 550,
-        height: 150,
-        flexDirection: 'row',
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+        width: 300,
+        height: 500,
         padding: 8,
-        justifyContent:'center',
+        alignItems:'center',
         borderRadius: "5px",
+        textAlign: 'center',
     },
 
     textoNome: {
@@ -70,8 +72,8 @@ export const styles = StyleSheet.create({
   
     texto: {
         fontSize: 13,
-        maxWidth: "90%",
-        paddingLeft: 5,
+        width: "60%",
+        // paddingLeft: 5,
         marginBottom: 5,
         backgroundColor: "#2b2b33",
         color: "white",
@@ -80,8 +82,8 @@ export const styles = StyleSheet.create({
 
     textoLvl: {
       fontSize: 13,
-      maxWidth: "90%",
-      paddingLeft: 5,
+      width: "60%",
+      // paddingLeft: 5,
       marginBottom: 5,
       backgroundColor: "#2b2b33",
       fontWeight: "bold",
@@ -93,7 +95,6 @@ export const styles = StyleSheet.create({
         height: 130,
         width: 130,
         borderRadius: 10,
-        marginRight: 11,
         backgroundColor: "#fff",
         border: "2px solid black"
     }
