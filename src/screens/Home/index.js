@@ -158,6 +158,9 @@ const Home = () => {
       >
         <View style={styles.boxModal}>
 
+        <Text style={{color:"#c7ac61", fontSize:"50", fontWeight:"bold"}}>APRENDENDO NOVA SKILL</Text>
+
+          <View style={styles.selectContainer}>
             <SelectList
               setSelected={(val) => setSelected(val)} 
               data={generalSkills}
@@ -166,7 +169,10 @@ const Home = () => {
               placeholder={"Selecione uma skill"}
               // defaultOption={}
             />
+          </View>
 
+          <View style={styles.inputETitulo}>
+          <Text style={{color:"#fff", fontSize:"20", fontWeight:"bold"}}>Selecione o nível da skill:</Text>
             <TextInput
               placeholder="lvl"
               placeholderTextColor="#918d8d"
@@ -175,9 +181,10 @@ const Home = () => {
               value={lvl}
               style={styles.input}
             />
+          </View>
 
-            <TouchableOpacity onPress={() => addSkill(skill, lvl)}>
-                <Text>ADICIONAR</Text>
+            <TouchableOpacity onPress={() => addSkill(skill, lvl)} style={styles.addSkill}>
+                <Text style={{color:"#fff", fontSize:"70", fontWeight:"bold"}}>ADICIONAR</Text>
             </TouchableOpacity>
         </View>
       </Modalize>

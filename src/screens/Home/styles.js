@@ -14,11 +14,13 @@ export const styles = StyleSheet.create({
   },
 
   boxModal:{
-    flex: 2,
+    flex: 1,
+    minHeight: 800,
     display: "flex",
-    // alignItems: "center",
-    // justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "space-evenly",
     flexDirection: "column",
+    backgroundColor: "#1C1C1B",
     },
 
     logo: { 
@@ -52,6 +54,35 @@ export const styles = StyleSheet.create({
       backgroundColor: "#660e0a",
       padding: "5px",
       borderRadius: "3px",
-    }
+    },
+
+    input: {
+      border: "1px solid black",
+      padding: "0.5rem",
+      backgroundColor: "#fff",
+      borderRadius: "5px",
+      textAlign: "center",
+    },
+
+    addSkill: {
+      backgroundColor: "#660e0a",
+      padding: "40px",
+      borderRadius: "5px",
+      fontSize:"70",
+  
+    },
+
+    selectContainer: {
+      backgroundColor: "#fff",
+      borderRadius: "5px",
+    },
+
+    inputETitulo: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+      height: 80,
+    },
 
 });
