@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { api } from '../../services/api';
 import { styles } from "./styles";
@@ -18,7 +18,6 @@ const Cadastro = () => {
     
     
     const registerUser = () => {
-      const tokenStorage = AsyncStorage.getItem("token")
 
         if (password !== confirmPassword) {
           setMensagem("")
@@ -37,6 +36,9 @@ const Cadastro = () => {
           console.log(res)
           console.log(res.data.id)
           AsyncStorage.setItem("userID", res.data.id)
+          Alert.alert("Usuário criado com sucesso!","Retornando a tela de login", [
+            {text: "OK"}
+          ])
           navigation.navigate('Login')
 
         }).catch((err) => { 
