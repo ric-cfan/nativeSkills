@@ -24,6 +24,10 @@ export const AuthProvider = ({children}) => {
       AsyncStorage.setItem("username", JSON.parse(response.config.data).login)
       
       api.defaults.headers.Authorization = `Bearer ${response.headers.authorization}`;
+      if(response.status === 200) {
+        return true
+      }
+      return false
    
     })
     .catch(e => { 
@@ -39,6 +43,7 @@ export const AuthProvider = ({children}) => {
     AsyncStorage.removeItem("token")
     AsyncStorage.removeItem("userID")
     AsyncStorage.removeItem("user")
+    AsyncStorage.removeItem("username")
   }
 
   return (

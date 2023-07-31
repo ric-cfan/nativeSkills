@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
 import { CheckBox } from "react-native-elements";
 import Icon from "react-native-vector-icons/Feather";
 import { AuthContext } from "../../Context/auth";
@@ -39,8 +39,15 @@ const Login = () => {
     } else {
       await AsyncStorage.removeItem("loginCredentials");
     }
-    login(username, password).then(() => {
-      navigation.navigate("Home");
+    login(username, password).then((res) => {
+      if(res) {
+        navigation.navigate("Home");
+      }
+      else {
+        Alert.alert("Ocorreu um erro ao logar","Verifique se seu usuário e senha estão corretos", [
+        {text: "OK"}
+      ])
+    }
     });
   };
 

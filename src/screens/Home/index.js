@@ -1,27 +1,34 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useEffect, useState, useRef } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View, FlatList, Alert } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { AuthContext } from "../../Context/auth";
 import { api } from "../../services/api";
 import { styles } from "./styles";
 import { Modalize } from "react-native-modalize";
 import { SelectList } from "react-native-dropdown-select-list";
+import { SkillCard } from "../../components/SkillCard";
 
 const Home = () => {
   const { logout } = useContext(AuthContext);
   const navigation = useNavigation();
   const [userSkills, setUserSkills] = useState([]);
   const [generalSkills, setGeneralSkills] = useState([]);
+  const [selected, setSelected] = useState([]);
   const [skill, setSkill] = useState([]);
-  const [lvl, setLvl] = useState();
+  const [lvl, setLvl] = useState(0);
   const modalizeRef = useRef(null);
+  const [userName, setUserName] = useState("")
 
   useEffect(() => {
     getUserId() 
     getGeneralSkills()
   }, []);
+
+  useEffect(() => {
+    console.log(skill)
+  }, [skill]);
 
   //requisicoes
   //gets
@@ -29,6 +36,7 @@ const Home = () => {
   const getUserId = async() => {
     const token = await AsyncStorage.getItem("token")
     const username = await AsyncStorage.getItem("username")
+    setUserName(username)
     const userId = await api.get(
       `/api/usuario/${username}`
       , { headers: { "Authorization": `${token}`, "Accept": "application/json"}}
@@ -46,6 +54,7 @@ const Home = () => {
       , { headers: { "Authorization": `${token}`, "Accept": "application/json"}}
     );
     setUserSkills(response.data);
+    console.log(response.data)
     } 
     catch {
       console.error(error);
@@ -59,42 +68,39 @@ const Home = () => {
       `/api/skill/`
       , { headers: { "Authorization": `${token}`, "Accept": "application/json"}}
     );
-    setGeneralSkills(response.data);
+    let newArray = response.data.map((item) => {
+      return { key: item.id, value: item.nome }
+  })
+    setGeneralSkills(newArray);
     } 
     catch {
       console.error(error);
     };
   }
 
-  //delete
-
-  const deleteSkill = async (userSkillId) => {
-    const token = await AsyncStorage.getItem("token")
-    api.delete(`/api/usuarioSkill/${userSkillId}`, { headers: { "Authorization": `${token}`, "Accept": "application/json"}})
-      .then(() => 
-        getSkills()
-      );
-  };
-
-  //put
-
-  const updateSkill = async (userSkillId, lvl) => {
-    const token = await AsyncStorage.getItem("token")
-    api.put(`/api/usuarioSkill/${userSkillId}`, { headers: { "Authorization": `${token}`, "Accept": "application/json"}})
-      .then(() => 
-        getSkills()
-      );
-  };
-
   //post
 
   const addSkill = async (skillId, lvl) => {
     const token = await AsyncStorage.getItem("token")
     const userId = await AsyncStorage.getItem("userId")
-    api.post(`/api/usuarioSkill/`, { headers: { "Authorization": `${token}`, "Accept": "application/json"}})
+
+    const newSkill = {
+      lvl: lvl,
+      skill: {
+        id: skillId
+      },
+      usuario: {
+        id: userId
+      }
+    }
+
+    api.post(`/api/usuarioSkill/`, newSkill, { headers: { "Authorization": `${token}`, "Accept": "application/json"}})
       .then(() => 
-        getSkills()
+        getUserSkills()
       );
+      Alert.alert("Você está mais forte","Skill adicionada com sucesso!", [
+        {text: "OK"}
+      ])
   };
 
   //outras funcoes
@@ -111,28 +117,52 @@ const Home = () => {
   return (
     <View style={styles.boxHome}>
 
+      <View style={styles.topo}>
+
       <Image style={styles.logo} source={require("../../../assets/Logo.png")}/>
 
-      <TouchableOpacity>
-        <Text style={styles.abrirModal} onPress={onOpen} >ADICIONAR SKILL</Text>
+      <View style={styles.centroTopo}>
+        <Text>Bem vindo, {userName}!</Text>
+
+        <TouchableOpacity>
+          <Text style={styles.abrirModal} onPress={onOpen} >ADICIONAR SKILL</Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity onPress={() => handleLogout()} style={styles.logout}>
+        <Text>LOGOUT</Text>
+        <Icon name="logout" size={30} />
       </TouchableOpacity>
-      
-      <Text onPress={() => handleLogout()} style={styles.link}>
-        LOGOUT
-      </Text>
+    </View>
+
+      <View style={styles.mainBody}>
+
+        <View style={styles.listaUserSkills}>
+          <FlatList
+            data={userSkills}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => <SkillCard item={item} />}
+          />
+        </View>
+
+      </View>
 
 
       {/* Modal */}
 
       <Modalize
         ref={modalizeRef}
-        snapPoint={250}
+        // panGestureEnabled={false}
+        // adjustToContentHeight={true}
+        // tapGestureEnabled={false}
       >
         <View style={styles.boxModal}>
 
             <SelectList
-              setSelected={setSkill} 
-              // data={}
+              setSelected={(val) => setSelected(val)} 
+              data={generalSkills}
+              save={"key"}
+              onSelect={() => setSkill(selected)}
               placeholder={"Selecione uma skill"}
               // defaultOption={}
             />
@@ -146,7 +176,7 @@ const Home = () => {
               style={styles.input}
             />
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => addSkill(skill, lvl)}>
                 <Text>ADICIONAR</Text>
             </TouchableOpacity>
         </View>

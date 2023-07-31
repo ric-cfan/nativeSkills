@@ -14,14 +14,25 @@ export const styles = StyleSheet.create({
   },
 
   boxModal:{
-    flex: 1,
-    width: "100%",
+    flex: 2,
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
     // backgroundColor: "#000000",
     flexDirection: "column",
-    alignItems: "center",
     },
+
+    logo: { 
+      width: 158,
+      height: 130,
+      marginBottom: 30,
+      },
+      
+    topo: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-evenly",
+      alignItems: "center",
+    }
 
 });
