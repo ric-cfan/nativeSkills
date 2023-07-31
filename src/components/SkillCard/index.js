@@ -49,7 +49,9 @@ export const SkillCard = ({ item }) => {
                             <Text style={styles.texto}>Descrição: {item.skill.descricao}</Text>
                             <Text style={styles.texto}>Level: {newLvl}</Text>
 
-                            <Text style={styles.texto}>Subiu de lvl? Selecione o novo número e clique em atualizar</Text>
+                            <Text style={styles.textoLvl}>Subiu de lvl? Selecione o novo número abaixo e clique em atualizar:</Text>
+                            
+                            <View style={styles.inputBotoes}>
                           <TextInput
                             placeholder="lvl"
                             placeholderTextColor="#918d8d"
@@ -59,14 +61,15 @@ export const SkillCard = ({ item }) => {
                             style={styles.input}
                           />
 
-                        <View>
-                          <TouchableOpacity onPress={() => updateSkill(item.id, lvl)}>
-                            <Text>ATUALIZAR</Text>
+                        <View style={styles.botoes}>
+                          <TouchableOpacity onPress={() => updateSkill(item.id, lvl)} style={styles.atualizar}>
+                            <Text style={{color: "#fff", fontWeight: "bold"}}>ATUALIZAR</Text>
                           </TouchableOpacity>
 
-                          <TouchableOpacity onPress={() => deleteSkill(item.id)}>
-                            <Text>DELETAR</Text>
+                          <TouchableOpacity onPress={() => deleteSkill(item.id)} style={styles.deletar}>
+                            <Text style={{color: "#fff", fontWeight: "bold"}}>DELETAR</Text>
                           </TouchableOpacity>
+                          </View>
                         </View>
 
                         </View>

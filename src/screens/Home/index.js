@@ -122,16 +122,16 @@ const Home = () => {
       <Image style={styles.logo} source={require("../../../assets/Logo.png")}/>
 
       <View style={styles.centroTopo}>
-        <Text>Bem vindo, {userName}!</Text>
+        <Text style={{color:"#fff"}} >Bem vindo, {userName}!</Text>
 
-        <TouchableOpacity>
-          <Text style={styles.abrirModal} onPress={onOpen} >ADICIONAR SKILL</Text>
+        <TouchableOpacity style={styles.abrirModal}>
+          <Text onPress={onOpen} style={{color:"#fff", fontWeight: "bold", textAlign: "center"}} >ADICIONAR SKILL</Text>
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity onPress={() => handleLogout()} style={styles.logout}>
-        <Text>LOGOUT</Text>
-        <Icon name="logout" size={30} />
+        <Text style={{color:"#fff", fontWeight: "bold", fontSize: "50", textAlign: "center"}}>LOGOUT</Text>
+        <Icon name="logout" size={30} color = "#fff" />
       </TouchableOpacity>
     </View>
 

@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  // backgroundColor: "#000000",
+  backgroundColor: "#000000",
   flexDirection: "column",
   alignItems: "center",
   },
@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
     display: "flex",
     // alignItems: "center",
     // justifyContent: "center",
-    // backgroundColor: "#000000",
     flexDirection: "column",
     },
 
@@ -26,6 +25,7 @@ export const styles = StyleSheet.create({
       width: 158,
       height: 130,
       marginBottom: 30,
+      marginTop: 20,
       },
       
     topo: {
@@ -33,6 +33,25 @@ export const styles = StyleSheet.create({
       flexDirection: "row",
       justifyContent: "space-evenly",
       alignItems: "center",
+      backgroundColor: "#000000"
+    },
+
+    logout: {
+      display: "flex",
+      alignItems: "center",
+    },
+
+    centroTopo: {
+      display: "flex",
+      height: "50%",
+      justifyContent: "space-evenly",
+      alignItems: "center",
+    },
+
+    abrirModal: {
+      backgroundColor: "#660e0a",
+      padding: "5px",
+      borderRadius: "3px",
     }
 
 });
